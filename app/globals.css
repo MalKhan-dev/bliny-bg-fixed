@@ -1,6 +1,14 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face {
+  font-family: 'TrixieCyr';
+  src: url('/trixiecyr_plain.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -170,4 +178,11 @@ body{margin:0; overflow:hidden}
 
 
 .nav-wrap{position:absolute; left:549.84px; top:960.82px; width:840.86px; height:36.05px; z-index:3}
-.nav-item{position:absolute; display:block} .nav-item img{display:block; height:100%}
+.nav-item{position:absolute; display:block; transition: opacity 0.2s ease} 
+.nav-item img{display:block; height:100%}
+.nav-item:hover{opacity:0.8}
+.nav-item.active{opacity:0.6; cursor:default}
+
+/* Навигация из картинок: убираем baseline и лишний ведущий */
+.nav { line-height: 1; }
+.nav img, .nav svg { display: block; }

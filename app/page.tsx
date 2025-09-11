@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+import Navigation from "../components/Navigation";
 
 const BG_SIZES: [number,number][] = [
   [360,640],[375,667],[390,844],[414,896],[428,926],
@@ -89,21 +90,10 @@ export default function Home() {
                  style={{ left:850.91, top:595.3, width:540.75, height:80.86 }} alt="РЮМОЧКА!" />
           </div>
 
-          {/* Твоя навигация — картинки */}
-          <nav className="nav-wrap">
-            <Link href="/" className="nav-item" style={{left:0, top:0, width:181.1, height:36.05}}>
-              <img src="/nav/istoriya.png" alt="История" />
-            </Link>
-            <Link href="/gallery" className="nav-item" style={{left:232.28, top:0, width:181.82, height:36.05}}>
-              <img src="/nav/galereya.png" alt="Галерея" />
-            </Link>
-            <Link href="/menu" className="nav-item" style={{left:467.71, top:1.87, width:103.56, height:28.32}}>
-              <img src="/nav/menu.png" alt="Меню" />
-            </Link>
-            <Link href="/18plus" className="nav-item" style={{left:631.93, top:1.72, width:208.93, height:30.1}}>
-              <img src="/nav/18plus.png" alt="18+" />
-            </Link>
-          </nav>
+          {/* Новая навигация с выравниванием */}
+          <div className="nav-wrap">
+            <Navigation />
+          </div>
         </div>
       </div>
     </div>
