@@ -95,10 +95,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Новая навигация с выравниванием */}
-          <div className="nav-wrap">
-            <Navigation />
-          </div>
+          {/* Навигация */}
+          <Navigation currentPage="/" />
         </div>
       </div>
     </div>

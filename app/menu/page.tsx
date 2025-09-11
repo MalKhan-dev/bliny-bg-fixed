@@ -1,15 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
-import Link from "next/link"
+import Navigation from "../../components/Navigation"
 
 export default function MenuPage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
@@ -31,20 +24,216 @@ export default function MenuPage() {
         </div>
 
         <div className="absolute left-[81px] top-[148px] w-[426px] h-[721px]">
-          <img src="/images/menu-left.svg" alt="Меню слева" className="w-full h-full object-contain" />
+          <div className="space-y-1 text-black text-sm lg:text-base xl:text-lg leading-tight" style={{ fontFamily: 'TrixieCyr, sans-serif' }}>
+            <div className="flex justify-between">
+              <span>Порция блинчиков с маслом (3 шт.)</span>
+              <span>105 р.</span>
+            </div>
+            <div className="ml-4 space-y-1">
+              <div>Добавка сои</div>
+              <div className="flex justify-between">
+                <span>— Сметаной</span>
+                <span>30 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>— Сгущенкой</span>
+                <span>25 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>— Вареньем</span>
+                <span>25 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>— Медом</span>
+                <span>25 р.</span>
+              </div>
+              <div className="text-xs">(Указана стоимость добавки)</div>
+            </div>
+            <div className="pt-2">
+              <div className="flex justify-between">
+                <span>
+                  Блинчики со смородиной
+                  <br />и сахарной пудрой
+                </span>
+                <span>160 р.</span>
+              </div>
+            </div>
+            <div className="pt-2 space-y-1">
+              <div className="flex justify-between">
+                <span>Блинчики с килькой пряного посола</span>
+                <span>160 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Блинчики с имитированной икрой</span>
+                <span>160 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Блинчики с красной икрой</span>
+                <span>480 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Блинчик с лососем</span>
+                <span>440 р.</span>
+              </div>
+            </div>
+            <div className="pt-2 space-y-1">
+              <div className="flex justify-between">
+                <span>Блинчик завернутый с:</span>
+                <span></span>
+              </div>
+              <div className="ml-4 space-y-1">
+                <div className="flex justify-between">
+                  <span>— Говяжьим фаршем</span>
+                  <span>100 р.</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>— Жульеном из лесных грибов и курицы</span>
+                  <span>100 р.</span>
+                </div>
+              </div>
+            </div>
+            <div className="pt-2 space-y-1">
+              <div className="flex justify-between">
+                <span>Чай</span>
+                <span>65 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Кофе зерновой с молоком из ТЭНа</span>
+                <span>90 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Кофе эспрессо/Американо</span>
+                <span>100 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Капучино/Латте</span>
+                <span>200 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Кофе в стаканчик с собой, 300 мл</span>
+                <span>230 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Кофе в стаканчик с собой, 400 мл</span>
+                <span>260 р.</span>
+              </div>
+            </div>
+            <div className="pt-2 space-y-1">
+              <div className="flex justify-between">
+                <span>Компот</span>
+                <span>75 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Морс ягодный</span>
+                <span>75 р.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="absolute left-[522px] top-[152px] w-[67px] h-[719px]">
-          <img src="/images/price-left.svg" alt="Ценник слева" className="w-full h-full object-contain" />
+
+        {/* !!! ИЗМЕНЕНИЕ №2: БЛОК ПРАВОЙ КОЛОНКИ С ТОЧНЫМИ КООРДИНАТАМИ !!! */}
+        <div
+          className="absolute"
+          style={{ top: '309.79px', left: '693.39px' }}
+        >
+          <div className="space-y-1 text-black text-sm lg:text-base xl:text-lg leading-tight" style={{ fontFamily: 'TrixieCyr, sans-serif' }}>
+            <div className="flex justify-between">
+              <span>Пельмени (200 гр.)</span>
+              <span>220 р.</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Бульон к пельменям</span>
+              <span>40 р.</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Капуста тушеная с сосисками</span>
+              <span>205 р.</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Котлета домашняя</span>
+              <span>175 р.</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Котлета из щуки</span>
+              <span>190 р.</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Бефстроганов с гарниром</span>
+              <span>310 р.</span>
+            </div>
+            <div className="flex justify-between">
+              <span>
+                Рагу из 3-х видов мяса
+                <br />
+                утка/индейка/кура
+              </span>
+              <span>300 р.</span>
+            </div>
+            <div className="pt-2">
+              <div className="flex justify-between">
+                <span>
+                  Гарниры
+                  <br />
+                  Рис/Греча/Макароны
+                </span>
+                <span>80 р.</span>
+              </div>
+            </div>
+            <div className="pt-2 space-y-1">
+              <div className="flex justify-between">
+                <span>Супы</span>
+                <span>190 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Борщ</span>
+                <span>195 р.</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Рыбный</span>
+                <span>195 р.</span>
+              </div>
+            </div>
+            <div className="pt-2">
+              <div>Салаты/закуски</div>
+              <div className="space-y-1">
+                <div className="flex justify-between">
+                  <span>Салат витаминный</span>
+                  <span>120 р.</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Столичный</span>
+                  <span>155 р.</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Винегрет</span>
+                  <span>130 р.</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Яйцо под майонезом</span>
+                  <span>65 р.</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Глазунья (1шт.)</span>
+                  <span>65 р.</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Сосиска</span>
+                  <span>95 р.</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Сельдь</span>
+                  <span>150 р.</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Соленья</span>
+                  <span>165 р.</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="absolute left-[693px] top-[210px] w-[304px] h-[618px]">
-          <img src="/images/menu-right.svg" alt="Меню справа" className="w-full h-full object-contain" />
-        </div>
-
-        <div className="absolute left-[1132px] top-[209px] w-[70px] h-[619px]">
-          <img src="/images/price-right.svg" alt="Ценник справа" className="w-full h-full object-contain" />
-        </div>
 
         {/* Чайничек */}
         <div className="absolute left-[1213px] top-[143px] w-[207px] h-[207px]">
@@ -86,49 +275,9 @@ export default function MenuPage() {
           <img src="/images/pancakes.png" alt="Блинчики" className="w-full h-full object-contain" />
         </div>
 
+        {/* Mobile content */}
         <div className="md:hidden absolute inset-0 bg-white/95 backdrop-blur-sm">
           <div className="p-6">
-            {/* Mobile menu button */}
-            <div className="absolute top-4 right-4 z-50">
-              <button onClick={toggleMenu} className="bg-white/80 backdrop-blur-sm p-2 rounded-lg shadow-lg">
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-
-            {/* Mobile menu overlay */}
-            {isMenuOpen && (
-              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40">
-                <div className="absolute top-16 right-4 bg-white rounded-lg shadow-xl p-6 min-w-[200px]">
-                  <nav className="flex flex-col space-y-4">
-                    <Link href="/" className="text-lg font-bold text-black hover:text-blue-600 transition-colors">
-                      Главная
-                    </Link>
-                    <Link
-                      href="/history"
-                      className="text-lg font-bold text-black hover:text-blue-600 transition-colors"
-                    >
-                      История
-                    </Link>
-                    <Link
-                      href="/honor-board"
-                      className="text-lg font-bold text-black hover:text-blue-600 transition-colors"
-                    >
-                      Галерея
-                    </Link>
-                    <Link href="/menu" className="text-lg font-bold text-blue-600">
-                      Меню
-                    </Link>
-                    <Link
-                      href="/menu-18"
-                      className="text-lg font-bold text-black hover:text-blue-600 transition-colors"
-                    >
-                      18+
-                    </Link>
-                  </nav>
-                </div>
-              </div>
-            )}
-
             {/* Mobile logo */}
             <div className="flex justify-center pt-6 mb-8">
               <div className="w-[320px] h-[116px]">
@@ -159,50 +308,12 @@ export default function MenuPage() {
                 </div>
               </div>
             </div>
-
-            {/* Mobile navigation */}
-            <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2">
-              <nav className="flex flex-row justify-center items-center gap-3 px-2">
-                <Link href="/" className="block hover:opacity-80 transition-opacity">
-                  <img src="/images/nav-home.png" alt="Главная" className="w-[70px] h-[14px] object-contain" />
-                </Link>
-                <Link href="/history" className="block hover:opacity-80 transition-opacity">
-                  <img src="/images/nav-history.png" alt="История" className="w-[70px] h-[14px] object-contain" />
-                </Link>
-                <Link href="/honor-board" className="block hover:opacity-80 transition-opacity">
-                  <img src="/images/nav-gallery.png" alt="Галерея" className="w-[70px] h-[14px] object-contain" />
-                </Link>
-                <Link href="/menu" className="block hover:opacity-80 transition-opacity">
-                  <img src="/images/nav-menu.png" alt="Меню" className="w-[50px] h-[12px] object-contain" />
-                </Link>
-                <Link href="/menu-18" className="block hover:opacity-80 transition-opacity">
-                  <img src="/images/nav-18-plus.png" alt="18+" className="w-[35px] h-[12px] object-contain" />
-                </Link>
-              </nav>
-            </div>
           </div>
         </div>
       </div>
 
-      <div className="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <nav className="flex justify-center space-x-8 lg:space-x-12 xl:space-x-16">
-          <Link href="/" className="block hover:opacity-80 transition-opacity w-[181px] h-[35px]">
-            <img src="/images/nav-home.png" alt="Главная" className="w-full h-full object-contain" />
-          </Link>
-          <Link href="/history" className="block hover:opacity-80 transition-opacity w-[182px] h-[36px]">
-            <img src="/images/nav-history.png" alt="История" className="w-full h-full object-contain" />
-          </Link>
-          <Link href="/honor-board" className="block hover:opacity-80 transition-opacity w-[182px] h-[36px]">
-            <img src="/images/nav-gallery.png" alt="Галерея" className="w-full h-full object-contain" />
-          </Link>
-          <Link href="/menu" className="block hover:opacity-80 transition-opacity w-[181px] h-[35px]">
-            <img src="/images/nav-menu.png" alt="Меню" className="w-full h-full object-contain" />
-          </Link>
-          <Link href="/menu-18" className="block hover:opacity-80 transition-opacity w-[182px] h-[36px] -ml-[10px]">
-            <img src="/images/nav-18-plus.png" alt="18+" className="w-full h-full object-contain" />
-          </Link>
-        </nav>
-      </div>
+      {/* Навигация */}
+      <Navigation currentPage="/menu" />
     </div>
   )
 }

@@ -100,8 +100,8 @@ export default function Navigation({ currentPage, variant = 'default' }: Navigat
         </div>
       )}
 
-      {/* Desktop navigation */}
-      <footer className="hidden md:block pb-6">
+      {/* Desktop navigation - fixed at bottom */}
+      <footer className="hidden md:block fixed bottom-0 left-0 right-0 z-20 pb-6">
         <nav className="flex justify-center space-x-8 lg:space-x-12 xl:space-x-16">
           {menuItems.map((item) => (
             <Link
