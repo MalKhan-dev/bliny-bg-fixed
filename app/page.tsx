@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import Navigation from "../components/Navigation";
+import Hero from "../components/Hero";
 
 const BG_SIZES: [number,number][] = [
   [360,640],[375,667],[390,844],[414,896],[428,926],
@@ -74,31 +75,9 @@ export default function Home() {
       
       {/* 4 PNG-угла с масштабированием от базового кадра */}
       <CornersOverlay />
-      <div className="absolute inset-x-0 top-0 flex justify-center">
-        <div className="frame1440">
-          <div className="paper layer" />
-
-          {/* Контент 1:1 по твоим координатам */}
-          <div className="content">
-            <img src="/art/вывеска.png" className="layer"
-                 style={{ left:306, top:-11, width:1002.85, height:362 }} alt="Вывеска" />
-            <img src="/art/Повар.png" className="layer"
-                 style={{ left:14, top:22, width:859, height:1063 }} alt="Повар" />
-            <div className="layer blini-text"
-                 style={{ left:860.36, top:365.73, width:494.89, height:207.09, fontSize: '120px' }}>
-              БЛИНЧИК 
-                 <br/>И
-            </div>
-            <div className="layer blini-text"
-                 style={{ left:850.91, top:595.3, width:540.75, height:80.86, fontSize: '120px' }}>
-              РЮМОЧКА!
-            </div>
-          </div>
-
-          {/* Навигация */}
-          <Navigation currentPage="/" />
-        </div>
-      </div>
+      
+      {/* Hero с масштабированием 1:1 по Figma */}
+      <Hero />
     </div>
   );
 }

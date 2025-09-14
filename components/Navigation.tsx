@@ -19,7 +19,7 @@ export default function Navigation({ currentPage, variant = 'default' }: Navigat
   const menuItems = [
     { href: "/", label: "Главная" },
     { href: "/history", label: "История" },
-    { href: "/honor-board", label: "Доска почёта" },
+    { href: "/honor-board", label: "Доска\u00A0почёта" },
     { href: "/menu", label: "Меню" },
     { href: "/menu-18", label: "18+" }
   ]

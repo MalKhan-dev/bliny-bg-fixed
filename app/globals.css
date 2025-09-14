@@ -153,10 +153,6 @@
 
 html,body{height:100%}
 
-/* кадр 1440×1050 (как уже есть) */
-:root{ --fit-scale: min(calc(100vw/1440), calc(100vh/1050)); }
-.frame1440{ position:relative; width:1440px; height:1050px;
-  transform:scale(var(--fit-scale)); transform-origin:top center }
 .layer{position:absolute}
 .paper{ inset:0; background:url('/bg/paper-tile.png') repeat; z-index:0 }
 .content{ position:absolute; inset:0; z-index:2 }
@@ -212,4 +208,94 @@ html,body{height:100%}
 /* Дополнительные правила для специфичности */
 html *, body *, div *, span *, p *, h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
   font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+}
+
+/* ===== HERO МАСШТАБИРОВАНИЕ ===== */
+
+html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
+* { box-sizing: border-box; }
+
+/* Точные размеры фрейма Figma */
+:root{
+  --base-w: 1440px;
+  --base-h: 1050px;
+
+  /* Устанавливаем отступы сверху и снизу */
+  --safe-pad-top: 45px;
+  --safe-pad-bottom: 120px;
+  --safe-pad-left: 30px;
+  --safe-pad-right: 30px;
+
+  --scale: min(
+    calc((100vw - var(--safe-pad-left) - var(--safe-pad-right)) / var(--base-w)),
+    calc((100vh - var(--safe-pad-top) - var(--safe-pad-bottom)) / var(--base-h))
+  );
+
+  --offset-x: 0px;
+  --offset-y: 0px;
+}
+
+/* Центрирование фрейма */
+.frame-fit{
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  overflow: hidden;
+  pointer-events: none; /* вернём клики точечно */
+  z-index: 10;
+}
+
+/* Сдвиг всего кадра в реальных px (не масштабируется) */
+.frame-offset{
+  transform: translate(var(--offset-x), var(--offset-y));
+}
+
+/* Сам кадр ровно размера Figma — только масштабируем */
+#frame{
+  position: relative;
+  width: var(--base-w);
+  height: var(--base-h);
+  transform-origin: top center;
+  transform: scale(var(--scale));
+  margin-top: var(--safe-pad-top);
+  margin-bottom: var(--safe-pad-bottom);
+}
+
+/* Внутри всё 1:1 по фигме */
+.content{ position: absolute; inset: 0; }
+
+/* Плавное изменение для всех элементов */
+.layer{ position: absolute; }
+
+/* Увеличиваем отступы в hero элементах */
+.hero-element {
+  margin-bottom: 16px;  /* дополнительный отступ между элементами hero */
+}
+
+/* Центрируем навигацию снизу */
+.nav-slot {
+  position: absolute;
+  left: 50%;
+  bottom: 20px; /* подвинем навигацию вниз */
+  transform: translateX(-50%);
+  width: auto;  /* ширина будет автоматически зависеть от контента */
+  pointer-events: auto;
+  font-size: 1.2em;  /* увеличим размер шрифта для видимости */
+  text-align: center; /* для красивого выравнивания текста */
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Для отображения всех пунктов меню в одну строку */
+.nav-slot a {
+  white-space: nowrap;
+  text-decoration: none;
+}
+.blini-text{ 
+  line-height: .9; 
+  user-select: none; 
+  font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+  color: #000;
+  font-weight: normal;
 }
