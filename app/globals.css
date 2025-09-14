@@ -1,0 +1,303 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';3000
+
+@font-face {
+  font-family: 'TrixieCyr';
+  src: url('/trixiecyr_plain.ttf?v=2') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'TrixieCyr', sans-serif;
+  }
+  
+  /* Применяем шрифт TrixieCyr ко всем текстовым элементам */
+  *, *::before, *::after {
+    font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+  }
+  
+  /* Дополнительно для всех текстовых элементов */
+  h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, label, li, td, th, 
+  .text-sm, .text-base, .text-lg, .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl, .text-7xl {
+    font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+  }
+  
+  /* Специально для body и html */
+  html, body {
+    font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+  }
+}
+
+/* ===== БЛИНЫ ФИНАЛЬНАЯ ВЕРСИЯ ===== */
+
+html,body{height:100%}
+
+.layer{position:absolute}
+.paper{ inset:0; background:url('/bg/paper-tile.png') repeat; z-index:0 }
+.content{ position:absolute; inset:0; z-index:2 }
+
+.bg-blini{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: var(--bg-url, url('/bg/final/bg-1920x1080.png'));
+}
+
+:root{
+  --corner-scale: 1;   /* приходит из хука */
+  --corner-thin: 0.50; /* РОВНО -50% толщины в базовом 1:1 */
+}
+
+.corners{ position:fixed; inset:0; z-index:1; pointer-events:none; }
+.corner{
+  position: fixed;
+  width: 1440px; height: 1050px;          /* базовый кадр из Figma */
+  transform: scale(calc(var(--corner-scale) * var(--corner-thin)));
+  transform-origin: var(--o, 50% 50%);
+  image-rendering: auto;
+}
+
+.corner-tl{ top:0; left:0;   --o: top left; }
+.corner-tr{ top:0; right:0;  --o: top right; }
+.corner-bl{ bottom:0; left:0;--o: bottom left; }
+.corner-br{ bottom:0; right:0;--o: bottom right; }
+
+/* для узких мобил слегка страхуем, чтобы углы не «таяли» */
+@media (max-width: 480px), (max-aspect-ratio: 3/4){
+  :root{ --corner-thin: 0.56; }
+}
+
+
+.nav-wrap{position:absolute; left:549.84px; top:960.82px; width:840.86px; height:36.05px; z-index:3}
+.nav-item{position:absolute; display:block} .nav-item img{display:block; height:100%}
+
+/* Специальный класс для текста "БЛИНЧИК И РЮМОЧКА!" */
+.blini-text {
+  font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+  font-weight: normal;
+  color: #000;
+  line-height: 1;
+}
+
+/* Принудительное применение шрифта ко всем элементам */
+* {
+  font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+}
+
+
+/* Дополнительные правила для специфичности */
+html *, body *, div *, span *, p *, h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+  font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+}
+
+/* ===== HERO МАСШТАБИРОВАНИЕ ===== */
+
+html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
+* { box-sizing: border-box; }
+
+/* Точные размеры фрейма Figma */
+:root{
+  --base-w: 1440px;
+  --base-h: 1050px;
+
+  /* Устанавливаем отступы сверху и снизу */
+  --safe-pad-top: 45px;
+  --safe-pad-bottom: 120px;
+  --safe-pad-left: 30px;
+  --safe-pad-right: 30px;
+
+  --scale: min(
+    calc((100vw - var(--safe-pad-left) - var(--safe-pad-right)) / var(--base-w)),
+    calc((100vh - var(--safe-pad-top) - var(--safe-pad-bottom)) / var(--base-h))
+  );
+
+  --offset-x: 0px;
+  --offset-y: 0px;
+}
+
+/* Центрирование фрейма */
+.frame-fit{
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  overflow: hidden;
+  pointer-events: none; /* вернём клики точечно */
+  z-index: 10;
+}
+
+/* Сдвиг всего кадра в реальных px (не масштабируется) */
+.frame-offset{
+  transform: translate(var(--offset-x), var(--offset-y));
+}
+
+/* Сам кадр ровно размера Figma — только масштабируем */
+#frame{
+  position: relative;
+  width: var(--base-w);
+  height: var(--base-h);
+  transform-origin: top center;
+  transform: scale(var(--scale));
+  margin-top: var(--safe-pad-top);
+  margin-bottom: var(--safe-pad-bottom);
+}
+
+/* Внутри всё 1:1 по фигме */
+.content{ position: absolute; inset: 0; }
+
+/* Плавное изменение для всех элементов */
+.layer{ position: absolute; }
+
+/* Увеличиваем отступы в hero элементах */
+.hero-element {
+  margin-bottom: 16px;  /* дополнительный отступ между элементами hero */
+}
+
+/* Центрируем навигацию снизу */
+.nav-slot {
+  position: absolute;
+  left: 50%;
+  bottom: 20px; /* подвинем навигацию вниз */
+  transform: translateX(-50%);
+  width: auto;  /* ширина будет автоматически зависеть от контента */
+  pointer-events: auto;
+  font-size: 1.2em;  /* увеличим размер шрифта для видимости */
+  text-align: center; /* для красивого выравнивания текста */
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Для отображения всех пунктов меню в одну строку */
+.nav-slot a {
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.blini-text{ 
+  line-height: .9; 
+  user-select: none; 
+  font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
+  color: #000;
+  font-weight: normal;
+}
