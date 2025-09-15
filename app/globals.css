@@ -222,7 +222,7 @@ html *, body *, div *, span *, p *, h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
   font-family: var(--font-trixie-cyr), 'TrixieCyr', 'Arial', 'Helvetica', sans-serif !important;
 }
 
-/* ===== HERO МАСШТАБИРОВАНИЕ ===== */
+/* ===== HERO СТИЛИ ===== */
 
 html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
 * { box-sizing: border-box; }
@@ -232,28 +232,6 @@ html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
   margin-bottom: 16px;  /* дополнительный отступ между элементами hero */
 }
 
-/* Центрируем навигацию снизу */
-.nav-slot {
-  position: absolute;
-  left: 50%;
-  bottom: 20px; /* подвинем навигацию вниз */
-  transform: translateX(-50%);
-  width: auto;  /* ширина будет автоматически зависеть от контента */
-  pointer-events: auto;
-  font-size: 1.2em;  /* увеличим размер шрифта для видимости */
-  text-align: center; /* для красивого выравнивания текста */
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Для отображения всех пунктов меню в одну строку */
-.nav-slot a {
-  white-space: nowrap;
-  text-decoration: none;
-}
-
 .blini-text{
   line-height: .9;
   user-select: none;
@@ -261,3 +239,85 @@ html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
   color: #000;
   font-weight: normal;
 }
+
+:root{
+  /* мастер-зона */
+  --zone-w: 1280;
+  --zone-h: 920;
+  --s: min(calc(100vw / var(--zone-w)), calc(100vh / var(--zone-h)));
+
+  /* макет героя */
+  --base-w: 1920;
+  --base-h: 1080;
+  /* перевод 1920→зону (обычно 1280/1920 = 0.6667, 920/1080 = 0.8519; берем min для общего случая) */
+  --k: min(calc(var(--zone-w)/var(--base-w)), calc(var(--zone-h)/var(--base-h)));
+
+  /* ползунки для позиционирования */
+  --hero-shift-x: 163px;
+  --hero-shift-y: -42px;
+  --nav-shift-x: 0px;
+  --nav-shift-y: -20px;
+  
+  /* ползунки для масштабирования */
+  --hero-scale: 1.15;
+  --nav-scale: 1.3;
+}
+
+/* сцена целиком, центрируем grid'ом */
+.hero-stage{position:fixed; inset:0; display:grid; place-items:center; overflow:hidden;}
+.hero-bg{position:fixed; inset:0; background:center/cover no-repeat url(/bg/final/bg-1920x1080.png); z-index:-1}
+
+/* ЗОНА 1280×920 — один масштаб вокруг центра */
+.zone{
+  position:relative;               /* важно для nav */
+  width:calc(var(--zone-w)*1px);
+  height:calc(var(--zone-h)*1px);
+  transform:scale(var(--s));
+  transform-origin:center center;
+  will-change:transform;
+  overflow:hidden;
+}
+
+/* КАРТА 1920×1080 — центрируем и масштабируем внутрь зоны */
+.zone__map{
+  position:absolute; left:50%; top:50%;
+  width:calc(var(--base-w)*1px);
+  height:calc(var(--base-h)*1px);
+  transform:translate(calc(-50% + var(--hero-shift-x)), calc(-50% + var(--hero-shift-y))) scale(calc(var(--k) * var(--hero-scale)));
+  transform-origin:center center;
+}
+
+/* навигация — низ зоны, по центру */
+.nav-in-zone{
+  position:absolute; left:0; right:0; bottom:8px;
+  display:flex; justify-content:center; gap:40px;
+  pointer-events:auto; z-index:2;
+  transform:translate(var(--nav-shift-x), var(--nav-shift-y)) scale(var(--nav-scale));
+}
+
+/* Ограничиваем размеры всех элементов внутри кадра */
+.frame * {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Специально для изображений в hero */
+.frame img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain;
+}
+
+/* Для текста в hero */
+.frame .blini-text {
+  max-width: 100% !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Помощники (если используются у тебя) */
+.corners{ position:fixed; inset:0; z-index:1; pointer-events:none; }
+.corner{ position: fixed; width: 1440px; height: 1050px; image-rendering:auto; }
+
+/* Не даём старым .nav-slot/.frame-fit вмешиваться */
+.nav-slot, .frame-fit, .frame-offset, #frame{ display: none !important; }
