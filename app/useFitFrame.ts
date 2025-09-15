@@ -1,56 +1,78 @@
-// app/useFitFrame.ts
 "use client";
+import { useLayoutEffect, useState } from "react";
 
-import { useEffect, useState } from "react";
-
-/** Масштабирует фрейм 1920×1080 по принципу contain и центрирует его.
- *  offsetX — дополнительная поправка по X (в пикселях базового вьюпорта), по умолчанию 0.
- */
 export function useFitFrame(
   baseW = 1920,
   baseH = 1080,
   offsetX = 0,
-  safeMarginY = 0 // внешний отступ сверху/снизу в px
+  safeMarginY = 0
 ) {
-  const [state, set] = useState({ scale: 1, left: 0, top: 0 });
+  const vw = () => (typeof window !== "undefined" ? (window.visualViewport?.width ?? window.innerWidth) : baseW);
+  const vh = () => (typeof window !== "undefined" ? (window.visualViewport?.height ?? window.innerHeight) : baseH);
 
-  useEffect(() => {
+  const compute = () => {
+    const _vw = vw();
+    const _vh = vh();
+    const usableH = _vh - safeMarginY * 2;
+    const s = Math.min(_vw / baseW, usableH / baseH);
+    const w = baseW * s;
+    const h = baseH * s;
+    const left = Math.round((_vw - w) / 2 + offsetX);
+    const top  = Math.round(safeMarginY + (usableH - h) / 2);
+    return { scale: s, left, top };
+  };
+
+  // ✅ Уже на первом клиентском рендере ставим верные значения
+  const [st, setSt] = useState(() => compute());
+
+  useLayoutEffect(() => {
+    let raf1 = 0, raf2 = 0;
+
     const apply = () => {
+      const next = compute();
+      setSt(next);
+      // (опционально) в CSS-переменные
+      document.documentElement.style.setProperty("--frame-scale", next.scale.toFixed(6));
+      document.documentElement.style.setProperty("--frame-left", `${next.left}px`);
+      document.documentElement.style.setProperty("--frame-top", `${next.top}px`);
       // нормализуем 100vh на мобилках
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-
-      const vw = window.innerWidth;
-      const vhPx = Math.floor(window.innerHeight);
-
-      // учитываем безопасные поля сверху/снизу
-      const s = Math.min(vw / baseW, (vhPx - safeMarginY * 2) / baseH);
-      const frameW = baseW * s;
-      const frameH = baseH * s;
-      const left = Math.floor((vw - frameW) / 2) + offsetX;
-      const top = safeMarginY + Math.floor((vhPx - safeMarginY * 2 - frameH) / 2);
-
-      set({ scale: s, left, top });
-      // публикуем в CSS-переменные (можно использовать в стилях при желании)
-      document.documentElement.style.setProperty("--frame-scale", s.toFixed(6));
-      document.documentElement.style.setProperty("--frame-left", `${left}px`);
-      document.documentElement.style.setProperty("--frame-top", `${top}px`);
+      const vhUnit = (window.visualViewport?.height ?? window.innerHeight) * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vhUnit}px`);
     };
 
-    apply();
-    let t: any;
-    const on = () => {
-      clearTimeout(t);
-      t = setTimeout(apply, 50);
+    const schedule = () => {
+      cancelAnimationFrame(raf1); cancelAnimationFrame(raf2);
+      raf1 = requestAnimationFrame(() => { apply(); raf2 = requestAnimationFrame(apply); });
     };
-    window.addEventListener("resize", on);
-    window.addEventListener("orientationchange", on);
+
+    schedule();
+
+    const onResize = schedule;
+    const onOrient = schedule;
+    const onPageShow = (e: PageTransitionEvent) => { if ((e as any).persisted) schedule(); };
+
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("orientationchange", onOrient, { passive: true });
+    window.addEventListener("pageshow", onPageShow as any);
+
+    const vv = window.visualViewport;
+    if (vv) {
+      vv.addEventListener("resize", onResize, { passive: true });
+      vv.addEventListener("scroll", onResize, { passive: true });
+    }
+
+    if ((document as any).fonts?.ready) {
+      (document as any).fonts.ready.then(schedule).catch(() => {});
+    }
+
     return () => {
-      window.removeEventListener("resize", on);
-      window.removeEventListener("orientationchange", on);
-      clearTimeout(t);
+      cancelAnimationFrame(raf1); cancelAnimationFrame(raf2);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onOrient);
+      window.removeEventListener("pageshow", onPageShow as any);
+      if (vv) { vv.removeEventListener("resize", onResize); vv.removeEventListener("scroll", onResize); }
     };
   }, [baseW, baseH, offsetX, safeMarginY]);
 
-  return state; // { scale, left, top }
+  return st; // { scale, left, top }
 }

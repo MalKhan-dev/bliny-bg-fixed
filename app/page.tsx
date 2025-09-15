@@ -114,9 +114,8 @@ export default function Home() {
           style={{
             width: 1280,
             left: "50%",
-            top: 1070, // было 1020, опускаем на +50px
             transform: "translateX(-50%)",
-            paddingLeft: 30, // смещение всего блока навигации вправо
+            bottom: 6
           }}
         >
           <Navigation currentPage="/" />
