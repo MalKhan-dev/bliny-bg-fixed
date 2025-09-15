@@ -6,9 +6,10 @@ import Navigation from "../components/Navigation";
 type Props = {
   children: React.ReactNode;
   withCorners?: boolean;
+  currentPage?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export default function HeroStage({ children, withCorners = true, ...rest }: Props) {
+export default function HeroStage({ children, withCorners = true, currentPage = "/", ...rest }: Props) {
   return (
     <div className="hero-stage" {...rest}>
       <div className="hero-bg" />
@@ -26,7 +27,7 @@ export default function HeroStage({ children, withCorners = true, ...rest }: Pro
           {children}
         </div>
         <nav className="nav-in-zone">
-          <Navigation currentPage="/" />
+          <Navigation currentPage={currentPage} />
         </nav>
       </div>
     </div>

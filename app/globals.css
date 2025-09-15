@@ -261,6 +261,22 @@ html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
   /* ползунки для масштабирования */
   --hero-scale: 1.15;
   --nav-scale: 1.3;
+  
+  /* ползунки для страницы истории - обновлено */
+  /* Самовар: сдвиг по X/Y и масштаб */
+  --history-samovar-x: -265px;       /* влево/вправо */
+  --history-samovar-y: 0px;      /* вверх/вниз */
+  --history-samovar-scale: 1.45;    /* размер (1.0 = 100%, 1.5 = 150%) */
+  /* Текст истории: сдвиг по X/Y и масштаб */
+  --history-text-x: 30px;          /* влево/вправо */
+  --history-text-y: 10px;          /* вверх/вниз */
+  --history-text-scale: 1.1;       /* размер (1.0 = 100%, 1.2 = 120%) */
+  
+  /* ползунки для страницы доски почёта */
+  /* Доска почёта: сдвиг по X/Y и масштаб */
+  --honor-board-x: -240px;            /* влево/вправо */
+  --honor-board-y: 170px;            /* вверх/вниз */
+  --honor-board-scale: 1.9;        /* размер (1.0 = 100%, 1.2 = 120%) */
 }
 
 /* сцена целиком, центрируем grid'ом */
@@ -321,3 +337,19 @@ html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
 
 /* Не даём старым .nav-slot/.frame-fit вмешиваться */
 .nav-slot, .frame-fit, .frame-offset, #frame{ display: none !important; }
+
+/* Стили для страницы истории */
+.history-samovar {
+  transform: translate(var(--history-samovar-x), var(--history-samovar-y)) scale(var(--history-samovar-scale)) !important;
+  transform-origin: center center !important;
+}
+
+.history-text {
+  transform: translate(var(--history-text-x), var(--history-text-y)) scale(var(--history-text-scale)) !important;
+  transform-origin: center center !important;
+}
+
+.honor-board {
+  transform: translate(var(--honor-board-x), var(--honor-board-y)) scale(var(--honor-board-scale)) !important;
+  transform-origin: center center !important;
+}

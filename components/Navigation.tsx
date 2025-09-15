@@ -34,7 +34,11 @@ export default function Navigation({ currentPage, variant = 'default' }: Navigat
       return `${baseClasses} text-white hover:text-yellow-300`
     }
     
-    return `${baseClasses} ${isActive ? 'text-[#b22222]' : 'text-black hover:text-[#b22222]'}`
+    if (isActive) {
+      return `${baseClasses} text-[#b22222]`
+    }
+    
+    return `${baseClasses} text-black hover:text-[#b22222]`
   }
 
   const getMobileLinkClassName = (href: string) => {
@@ -45,7 +49,11 @@ export default function Navigation({ currentPage, variant = 'default' }: Navigat
       return `${baseClasses} text-white hover:text-yellow-300`
     }
     
-    return `${baseClasses} ${isActive ? 'text-[#b22222]' : 'text-black hover:text-[#b22222]'}`
+    if (isActive) {
+      return `${baseClasses} text-[#b22222]`
+    }
+    
+    return `${baseClasses} text-black hover:text-[#b22222]`
   }
 
   if (variant === 'newspaper') {
