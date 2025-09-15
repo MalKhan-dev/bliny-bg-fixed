@@ -20,16 +20,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" as="image" href="/bg/final/bg-1920x1080.png" />
-        <style data-critical>
-          {`
-            body {
-              background-image: url('/bg/final/bg-1920x1080.png');
-              background-repeat: no-repeat;
-              background-position: center;
-              background-size: cover;
-            }
-          `}
-        </style>
       </head>
       <body className={`${trixieCyr.variable} ${GeistSans.variable} ${GeistMono.variable}`}>
         {children}

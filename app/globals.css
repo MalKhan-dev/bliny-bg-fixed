@@ -1,5 +1,16 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';3000
+@import 'tw-animate-css';
+
+/* -- Критический фон для предотвращения белого экрана -- */
+html, body {
+  height: 100%;
+}
+body {
+  background-image: url("/bg/final/bg-1920x1080.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
 @font-face {
   font-family: 'TrixieCyr';
