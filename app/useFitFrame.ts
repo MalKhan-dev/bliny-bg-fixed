@@ -17,7 +17,7 @@ export function useFitFrame(
     const s = Math.min(_vw / baseW, usableH / baseH);
     const w = baseW * s;
     const h = baseH * s;
-    const left = Math.round((_vw - w) / 2 + offsetX);
+    const left = Math.round((_vw - w) / 2 + offsetX * s);
     const top  = Math.round(safeMarginY + (usableH - h) / 2);
     return { scale: s, left, top };
   };
