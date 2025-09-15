@@ -24,7 +24,7 @@ export default function HeroStage({ children, withCorners = true, offsetX = 0, s
   const { scale, left, top } = useFitFrame(1920, 1080, effectiveOffsetX, safeMarginY);
 
   return (
-    <div className="relative w-full" style={{ minHeight: "calc(100 * var(--vh))" }} {...rest}>
+    <div className="relative w-full" style={{ minHeight: "calc(var(--vh, 1vh) * 100)" }} {...rest}>
       {/* Фоны вне масштаба — на весь вьюпорт */}
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat pointer-events-none"
@@ -48,6 +48,7 @@ export default function HeroStage({ children, withCorners = true, offsetX = 0, s
           height: 1080,
           transform: `translate(${left}px, ${top}px) scale(${scale})`,
           transformOrigin: "top left",
+          willChange: "transform"
         }}
       >
         {children}
