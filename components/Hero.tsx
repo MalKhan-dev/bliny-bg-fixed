@@ -23,6 +23,7 @@ export default function Hero() {
           fontSize: 120,
           lineHeight: 0.9,
           textAlign: "center",
+          fontWeight: "bold",
         }}
       >
         <div>БЛИНЧИК</div>
@@ -30,7 +31,7 @@ export default function Hero() {
       </div>
       {/* РЮМОЧКА! */}
       <div className="layer blini-text hero-element"
-           style={{ left: 850.91, top: 595.3, width: 540.75, height: 80.86, fontSize: "120px" }}>
+           style={{ left: 850.91, top: 595.3, width: 540.75, height: 80.86, fontSize: "120px", fontWeight: "bold" }}>
         РЮМОЧКА!
       </div>
     </div>
