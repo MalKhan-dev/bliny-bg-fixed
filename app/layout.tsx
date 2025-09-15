@@ -18,14 +18,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preload" as="image" href="/bg/final/bg-1920x1080.png" />
-        {/* при желании можно предзагрузить углы */}
-        <link rel="preload" as="image" href="/bg/corners/tl.png" />
-        <link rel="preload" as="image" href="/bg/corners/tr.png" />
-        <link rel="preload" as="image" href="/bg/corners/bl.png" />
-        <link rel="preload" as="image" href="/bg/corners/br.png" />
-      </head>
       <body className={`${trixieCyr.variable} ${GeistSans.variable} ${GeistMono.variable}`}>
         {children}
         <Analytics />

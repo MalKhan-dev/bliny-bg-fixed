@@ -301,12 +301,3 @@ html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
   color: #000;
   font-weight: normal;
 }
-
-/* -- анти-FOUT фон: тот же, что в HeroStage -- */
-html, body { height: 100%; }
-body {
-  background-image: url('/bg/final/bg-1920x1080.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; /* или contain, если нужно строго вписать */
-}

@@ -1,58 +1,54 @@
 // app/useFitFrame.ts
 "use client";
 
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
+/** Масштабирует фрейм 1920×1080 по принципу contain и центрирует его.
+ *  offsetX — дополнительная поправка по X (в пикселях базового вьюпорта), по умолчанию 0.
+ */
 export function useFitFrame(
   baseW = 1920,
   baseH = 1080,
   offsetX = 0,
-  safeMarginY = 0
+  safeMarginY = 0 // внешний отступ сверху/снизу в px
 ) {
-  const compute = () => {
-    const vw = typeof window !== "undefined" ? window.innerWidth : baseW;
-    const vh = typeof window !== "undefined" ? window.innerHeight : baseH;
+  const [state, set] = useState({ scale: 1, left: 0, top: 0 });
 
-    const usableH = vh - safeMarginY * 2;
-    const s = Math.min(vw / baseW, usableH / baseH);
-    const frameW = baseW * s;
-    const frameH = baseH * s;
-
-    const left = Math.floor((vw - frameW) / 2 + offsetX);
-    const top  = Math.floor(safeMarginY + (usableH - frameH) / 2);
-
-    return { scale: s, left, top };
-  };
-
-  // ✅ уже на первом рендере отдаём правильные значения
-  const [state, setState] = useState(() => compute());
-
-  useLayoutEffect(() => {
-    // нормализуем 100vh на мобилках
-    const fixVh = () => {
-      const vhUnit = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vhUnit}px`);
-    };
-
+  useEffect(() => {
     const apply = () => {
-      fixVh();
-      const next = compute();
-      setState(next);
-      // опционально — для CSS-варов (если где-то используешь)
-      document.documentElement.style.setProperty("--frame-scale", next.scale.toFixed(6));
-      document.documentElement.style.setProperty("--frame-left", `${next.left}px`);
-      document.documentElement.style.setProperty("--frame-top", `${next.top}px`);
+      // нормализуем 100vh на мобилках
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+
+      const vw = window.innerWidth;
+      const vhPx = Math.floor(window.innerHeight);
+
+      // учитываем безопасные поля сверху/снизу
+      const s = Math.min(vw / baseW, (vhPx - safeMarginY * 2) / baseH);
+      const frameW = baseW * s;
+      const frameH = baseH * s;
+      const left = Math.floor((vw - frameW) / 2) + offsetX;
+      const top = safeMarginY + Math.floor((vhPx - safeMarginY * 2 - frameH) / 2);
+
+      set({ scale: s, left, top });
+      // публикуем в CSS-переменные (можно использовать в стилях при желании)
+      document.documentElement.style.setProperty("--frame-scale", s.toFixed(6));
+      document.documentElement.style.setProperty("--frame-left", `${left}px`);
+      document.documentElement.style.setProperty("--frame-top", `${top}px`);
     };
 
     apply();
-    let tid = 0 as any;
-    const on = () => { clearTimeout(tid); tid = setTimeout(apply, 50); };
+    let t: any;
+    const on = () => {
+      clearTimeout(t);
+      t = setTimeout(apply, 50);
+    };
     window.addEventListener("resize", on);
     window.addEventListener("orientationchange", on);
     return () => {
-      clearTimeout(tid);
       window.removeEventListener("resize", on);
       window.removeEventListener("orientationchange", on);
+      clearTimeout(t);
     };
   }, [baseW, baseH, offsetX, safeMarginY]);
 
