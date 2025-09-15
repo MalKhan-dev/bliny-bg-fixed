@@ -227,57 +227,6 @@ html *, body *, div *, span *, p *, h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
 html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
 * { box-sizing: border-box; }
 
-/* Точные размеры фрейма Figma */
-:root{
-  --base-w: 1440px;
-  --base-h: 1050px;
-
-  /* Устанавливаем отступы сверху и снизу */
-  --safe-pad-top: 45px;
-  --safe-pad-bottom: 120px;
-  --safe-pad-left: 30px;
-  --safe-pad-right: 30px;
-
-  --scale: min(
-    calc((100vw - var(--safe-pad-left) - var(--safe-pad-right)) / var(--base-w)),
-    calc((100vh - var(--safe-pad-top) - var(--safe-pad-bottom)) / var(--base-h))
-  );
-
-  --offset-x: 0px;
-  --offset-y: 0px;
-}
-
-/* Центрирование фрейма */
-.frame-fit{
-  position: fixed; inset: 0;
-  display: grid; place-items: center;
-  overflow: hidden;
-  pointer-events: none; /* вернём клики точечно */
-  z-index: 10;
-}
-
-/* Сдвиг всего кадра в реальных px (не масштабируется) */
-.frame-offset{
-  transform: translate(var(--offset-x), var(--offset-y));
-}
-
-/* Сам кадр ровно размера Figma — только масштабируем */
-#frame{
-  position: relative;
-  width: var(--base-w);
-  height: var(--base-h);
-  transform-origin: top center;
-  transform: scale(var(--scale));
-  margin-top: var(--safe-pad-top);
-  margin-bottom: var(--safe-pad-bottom);
-}
-
-/* Внутри всё 1:1 по фигме */
-.content{ position: absolute; inset: 0; }
-
-/* Плавное изменение для всех элементов */
-.layer{ position: absolute; }
-
 /* Увеличиваем отступы в hero элементах */
 .hero-element {
   margin-bottom: 16px;  /* дополнительный отступ между элементами hero */
