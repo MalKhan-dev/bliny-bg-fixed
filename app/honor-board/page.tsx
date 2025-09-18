@@ -1,12 +1,13 @@
 "use client"
 
 import HeroStage from "../../components/HeroStage"
+import BannerControls from "../../components/BannerControls"
 
 export default function HonorBoardPage() {
   return (
     <HeroStage currentPage="/honor-board">
       {/* Вывеска в том же положении что и на главной */}
-      <img src="/art/вывеска.png" className="layer hero-element"
+      <img src="/art/вывеска.png" className="layer hero-element banner-controls"
            style={{ left: 306, top: -11, width: 1002.85, height: 362 }}
            alt="Вывеска" />
       
@@ -34,6 +35,9 @@ export default function HonorBoardPage() {
           />
         </div>
       </div>
+      
+      {/* Панель управления вывеской - отключена для ручного управления через CSS */}
+      {/* <BannerControls /> */}
     </HeroStage>
   )
 }

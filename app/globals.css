@@ -263,20 +263,27 @@ html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
   --nav-scale: 1.3;
   
   /* ползунки для страницы истории - обновлено */
-  /* Самовар: сдвиг по X/Y и масштаб */
-  --history-samovar-x: -265px;       /* влево/вправо */
-  --history-samovar-y: 0px;      /* вверх/вниз */
-  --history-samovar-scale: 1.45;    /* размер (1.0 = 100%, 1.5 = 150%) */
-  /* Текст истории: сдвиг по X/Y и масштаб */
-  --history-text-x: 30px;          /* влево/вправо */
-  --history-text-y: 10px;          /* вверх/вниз */
-  --history-text-scale: 1.1;       /* размер (1.0 = 100%, 1.2 = 120%) */
+      /* Самовар: сдвиг по X/Y и масштаб */
+      --history-samovar-x: -630px;       /* влево/вправо */
+      --history-samovar-y: -10px;      /* вверх/вниз */
+      --history-samovar-scale: 1.35;    /* размер (1.0 = 100%, 1.5 = 150%) */
+      /* Текст истории: сдвиг по X/Y и масштаб */
+      --history-text-x: -550px;          /* влево/вправо */
+      --history-text-y: 185px;          /* вверх/вниз */
+      --history-text-scale: 1.30;       /* размер (1.0 = 100%, 1.2 = 120%) */
+      --history-text-width: 130%;      /* ширина текста (50% - 200%) */
+  --text-zoom: var(--history-text-scale, 1.0);  /* для масштабирования шрифтов */
   
   /* ползунки для страницы доски почёта */
   /* Доска почёта: сдвиг по X/Y и масштаб */
   --honor-board-x: -240px;            /* влево/вправо */
-  --honor-board-y: 170px;            /* вверх/вниз */
-  --honor-board-scale: 1.9;        /* размер (1.0 = 100%, 1.2 = 120%) */
+  --honor-board-y: 50px;            /* вверх/вниз */
+  --honor-board-scale: 2.7;        /* размер (1.0 = 100%, 1.2 = 120%) */
+  
+  /* Вывеска: сдвиг по X/Y и масштаб (только для honor-board) */
+  --banner-x: 725px;                    /* влево/вправо */
+  --banner-y: -55px;                    /* вверх/вниз */
+  --banner-scale: 0.5;                /* размер (1.0 = 100%, 1.2 = 120%) */
 }
 
 /* сцена целиком, центрируем grid'ом */
@@ -291,7 +298,7 @@ html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
   transform:scale(var(--s));
   transform-origin:center center;
   will-change:transform;
-  overflow:hidden;
+  overflow:visible;  /* позволяем тексту выходить за границы */
 }
 
 /* КАРТА 1920×1080 — центрируем и масштабируем внутрь зоны */
@@ -342,14 +349,66 @@ html, body, #__next { height: 100%; margin: 0; overflow: hidden; }
 .history-samovar {
   transform: translate(var(--history-samovar-x), var(--history-samovar-y)) scale(var(--history-samovar-scale)) !important;
   transform-origin: center center !important;
+  
+    /* Отладка - временно */
+    /* border: 2px solid blue;
+    background: rgba(0, 0, 255, 0.1); */
+}
+
+/* Стили для вывески на странице honor-board */
+.banner-controls {
+  transform: translate(var(--banner-x), var(--banner-y)) scale(var(--banner-scale)) !important;
+  transform-origin: center center !important;
 }
 
 .history-text {
-  transform: translate(var(--history-text-x), var(--history-text-y)) scale(var(--history-text-scale)) !important;
-  transform-origin: center center !important;
+  /* Убираем transform отсюда - он применяется к .history-text-content */
 }
 
 .honor-board {
   transform: translate(var(--honor-board-x), var(--honor-board-y)) scale(var(--honor-board-scale)) !important;
   transform-origin: center center !important;
+}
+
+/* ===== СТИЛИ ДЛЯ ИСТОРИИ ===== */
+
+/* Обёртка текста — никаких фиксированных ограничений */
+.history-text-content{
+  width: var(--history-text-width, 100%);
+  margin: 0 auto;
+  text-align: left;
+  white-space: normal;        /* убрать pre-wrap/nowrap */
+  overflow-wrap: anywhere;    /* длинные слова */
+  hyphens: auto;              /* переносы по-русски (lang="ru") */
+  color: #141414;
+  
+  /* Применяем ползунки к контенту */
+  transform: translate(var(--history-text-x, 0px), var(--history-text-y, 0px)) scale(var(--history-text-scale, 1)) !important;
+  transform-origin: center center !important;
+  
+      /* Отладка - временно */
+      /* border: 2px solid red;
+      background: rgba(255, 0, 0, 0.1); */
+}
+
+/* Заголовок как в исходнике */
+.history-title{
+  font-family: var(--font-trixie-cyr, 'TrixieCyr', Arial, Helvetica, sans-serif);
+  font-size: calc(36px * var(--text-zoom));
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+  text-align: center;  /* центрируем заголовок */
+}
+
+/* Основной текст как в исходнике */
+.history-body{
+  font-family: var(--font-trixie-cyr, 'TrixieCyr', Arial, Helvetica, sans-serif);
+  font-size: calc(18px * var(--text-zoom));
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+  margin: 0 0 12px 0;
 }
